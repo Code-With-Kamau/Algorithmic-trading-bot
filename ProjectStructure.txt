@@ -1,0 +1,200 @@
+SMC SCALPING BOT - COMPLETE PROJECT STRUCTURE
+==============================================
+
+scalper_bot/
+│
+├── main.py                          # Entry point - initializes and runs the bot
+│
+├── config/
+│   ├── __init__.py                  # Empty file (create this)
+│   ├── settings.py                  # Configuration management
+│   └── risk_management.py           # Risk calculations and validation
+│
+├── core/
+│   ├── __init__.py                  # Empty file (create this)
+│   ├── market_data.py               # MT5 data fetching and preprocessing
+│   ├── strategy.py                  # Main SMC scalping strategy logic
+│   ├── order_execution.py           # Trade execution via MT5
+│   └── trade_manager.py             # Position management (breakeven, trailing, etc.)
+│
+├── analysis/
+│   ├── __init__.py                  # Empty file (create this)
+│   ├── indicators.py                # Technical indicators (RSI, ATR, EMA, etc.)
+│   ├── smc_logic.py                 # Smart Money Concepts detection
+│   └── liquidity.py                 # Liquidity analysis and sweeps
+│
+├── database/
+│   ├── __init__.py                  # Empty file (create this)
+│   ├── database.py                  # SQLite operations
+│   ├── models.sql                   # Database schema (reference only)
+│   └── trades.db                    # SQLite database (auto-created)
+│
+├── web/
+│   ├── __init__.py                  # Empty file (create this)
+│   ├── app.py                       # Flask application
+│   ├── static/                      # Static assets (create empty folder)
+│   │   └── (CSS/JS files if needed)
+│   └── templates/
+│       └── dashboard.html           # Web dashboard UI
+│
+├── utils/
+│   ├── __init__.py                  # Empty file (create this)
+│   ├── logger_config.py             # Logging configuration
+│   └── helpers.py                   # Utility functions
+│
+├── tests/
+│   ├── __init__.py                  # Empty file (create this)
+│   ├── test_strategy.py             # Strategy unit tests
+│   └── test_execution.py            # Execution unit tests
+│
+├── logs/                            # Log directory (auto-created)
+│   ├── trading_bot.log              # Main log file (auto-created)
+│   └── trades.log                   # Trade-specific log (auto-created)
+│
+├── requirements.txt                 # Python dependencies
+├── .env.example                     # Environment variables template
+├── .env                             # Your actual environment variables (create from .env.example)
+├── README.md                        # Main documentation
+├── QUICKSTART.md                    # Quick start guide
+└── PROJECT_STRUCTURE.txt            # This file
+
+IMPORTANT NOTES:
+===============
+
+1. CREATE THESE EMPTY FILES:
+   - All __init__.py files in module directories
+   - These make Python recognize directories as packages
+
+2. CREATE THESE DIRECTORIES:
+   - logs/ (will be auto-created but can pre-create)
+   - database/ (will be auto-created but can pre-create)
+   - web/static/ (create manually)
+   - web/templates/ (create manually)
+
+3. COPY AND RENAME:
+   - Copy .env.example to .env
+   - Edit .env with your credentials
+
+4. FILES TO IGNORE IN GIT (create .gitignore):
+   .env
+   *.pyc
+   __pycache__/
+   logs/
+   database/trades.db
+   *.log
+
+INITIALIZATION CHECKLIST:
+========================
+
+[ ] All .py files created from artifacts
+[ ] All __init__.py files created (empty)
+[ ] All directories created
+[ ] .env file created from .env.example
+[ ] requirements.txt exists
+[ ] Python 3.10+ installed
+[ ] MetaTrader 5 installed
+
+FOLDER PERMISSIONS:
+==================
+
+Ensure these directories are writable:
+- logs/
+- database/
+- web/static/ (if using)
+
+INSTALLATION COMMAND:
+====================
+
+pip install -r requirements.txt
+
+RUN COMMAND:
+===========
+
+python main.py
+
+DASHBOARD URL:
+=============
+
+http://localhost:5000
+
+FILE COUNT SUMMARY:
+==================
+
+Total Python Files: 19
+- Main: 1
+- Config: 2
+- Core: 4
+- Analysis: 3
+- Database: 1
+- Web: 1
+- Utils: 2
+- Tests: 2
+- __init__.py: 6 (empty files)
+
+Configuration Files: 5
+- requirements.txt
+- .env.example
+- .env (user creates)
+- README.md
+- QUICKSTART.md
+
+HTML Templates: 1
+- dashboard.html
+
+Database Schema: 1
+- models.sql (reference)
+
+Total Files: ~26 (excluding auto-generated)
+
+EXECUTION FLOW:
+==============
+
+1. main.py starts
+2. Loads settings from .env
+3. Connects to MT5
+4. Initializes database
+5. Creates strategy, executor, manager instances
+6. Starts Flask dashboard (background thread)
+7. Runs trading loop (async)
+8. Dashboard serves on port 5000
+
+DEPENDENCIES TREE:
+=================
+
+main.py
+├── config.settings
+├── config.risk_management
+├── core.market_data
+├── core.strategy
+│   ├── analysis.indicators
+│   ├── analysis.smc_logic
+│   ├── analysis.liquidity
+│   └── config.risk_management
+├── core.order_execution
+│   └── config.risk_management
+├── core.trade_manager
+├── database.database
+├── utils.logger_config
+└── web.app
+    └── utils.helpers
+
+QUICK VERIFICATION:
+==================
+
+After creating all files, verify:
+
+python -c "from config import settings; print('Config OK')"
+python -c "from core import strategy; print('Core OK')"
+python -c "from analysis import indicators; print('Analysis OK')"
+python -c "from database import database; print('Database OK')"
+python -c "from web import app; print('Web OK')"
+python -c "from utils import helpers; print('Utils OK')"
+
+All should print "X OK" without errors.
+
+If any import fails, check:
+1. __init__.py exists in that directory
+2. File name matches import statement
+3. No syntax errors in the file
+
+END OF STRUCTURE DOCUMENT
